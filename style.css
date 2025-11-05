@@ -1,0 +1,222 @@
+/* Reset ringan */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img { max-width: 100%; display: block; }
+
+/* Warna & tipografi dasar */
+:root{
+  --accent: #e74c3c;    /* warna link aktif (mirip contoh) */
+  --text: #333;
+  --muted: #888;
+  --border: #e5e5e5;
+  --maxw: 900px;        /* lebar konten */
+  --radius: 4px;
+}
+
+body{
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  
+  /* ✅ Background gradasi kiri–kanan */
+  background: linear-gradient(90deg, #e1d383, #e1d383, #e1d383);
+  background-attachment: fixed; /* biar gradasi ikut scroll */
+}
+
+
+/* Bungkus halaman */
+.container{
+  width: min(92%, var(--maxw));
+  margin: 32px auto 48px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,.03);
+  overflow: hidden; /* agar radius memotong gambar cover */
+}
+
+/* Header */
+.site-header{
+  padding: 20px 24px 0;
+}
+
+.logo{
+  margin: 0 0 8px;
+  font-size: 36px;
+  letter-spacing: .5px;
+}
+
+/* Nav */
+.site-nav{
+  display: flex;
+  gap: 18px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.site-nav a{
+  text-decoration: none;
+  color: #c04b5b; /* warna link normal agak kemerahan */
+  font-size: 14px;
+}
+
+
+
+/* style default link */
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  transition: 0.3s;
+}
+
+/* saat hover */
+nav a:hover {
+  color: var(--accent);
+}
+
+/* link aktif (yang sedang dipilih / diklik) */
+nav a.active {
+  color: var(--accent);
+  font-weight: bold;
+  border-bottom: 2px solid var(--accent);
+}
+
+
+
+.site-nav a:hover{
+  text-decoration: underline;
+}
+
+.site-nav a.active{
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cover img {
+  width: 100%;
+  height: auto;       /* biarkan tinggi mengikuti proporsi asli */
+  object-fit: contain; /* pastikan gambar terlihat utuh */
+  display: block;
+}
+
+
+/* Konten */
+.content{
+  padding: 20px 24px 28px;
+}
+
+.post-title{
+  margin: 12px 0 4px; 
+  font-size: 26px;
+}
+
+.post-meta{
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.post-meta a{
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+}
+
+.post p{
+  margin: 0 0 16px;
+  text-align: justify; /* seperti pada contoh */
+}
+
+/* Responsif kecil */
+@media (max-width: 550px){
+  .logo{ font-size: 40px; }
+  .cover img{ height: 280x; }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+/*tambahan/
+/* ===== Slider / Carousel ===== */
+.cover { padding: 0; }
+
+.slider{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.slider-track{
+  display: flex;
+  overflow-x: auto;                /* untuk swipe */
+  scroll-snap-type: x mandatory;   /* snap antar slide */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slide{
+  position: relative;
+  min-width: 100%;
+  height: clamp(220px, 45vw, 480px); /* responsif tinggi banner */
+  scroll-snap-align: start;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* isi penuh; kalau ingin tidak terpotong: 'contain' */
+  display: block;
+}
+
+/* Sembunyikan scrollbar horizontal */
+.slider-track::-webkit-scrollbar { display: none; }
+.slider-track { scrollbar-width: none; }
+
+/* Tombol panah */
+.slider-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,.45);
+  color: #fff;
+  border: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+.slider-btn:hover{ background: rgba(0,0,0,.6); }
+.slider-btn.prev{ left: 12px; }
+.slider-btn.next{ right: 12px; }
+
+/* Dots indikator */
+.slider-dots{
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  bottom: 10px;
+  display: flex; gap: 8px;
+}
+.slider-dots .dot{
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: transparent;
+  opacity: .8;
+  cursor: pointer;
+}
+.slider-dots .dot.active,
+.slider-dots .dot:hover{ background: #fff; opacity: 1; }
+
+/* Responsif kecil: sedikit pendek biar pas layar sempit */
+@media (max-width: 550px){
+  .slide{ height: clamp(180px, 50vw, 340px); }
+}
