@@ -220,3 +220,20 @@ html {
 @media (max-width: 550px){
   .slide{ height: clamp(180px, 50vw, 340px); }
 }
+
+/* Untuk gambar slider agar tidak terpotong */
+.slider img,
+figure.cover img {
+  width: 100%;
+  height: auto;          /* mengikuti tinggi gambar otomatis */
+  object-fit: contain;   /* tidak memotong gambar */
+}
+
+/* Jika ingin area slider tetap rapi */
+.slider {
+  max-width: 100%;
+  overflow: hidden;
+}
+img {
+  max-width: 100%;
+}
